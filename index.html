@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diffie-Hellman Key Exchange</title>
+</head>
+<style>
+    body {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 12rem auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#privateKey,
+#publicKey,
+#sharedSecret {
+  font-weight: bold;
+}
+</style>
+<body>
+<h1>Diffie-Hellman Key Exchange</h1>
+<p>Enter a prime number (p) and a primitive root (g):</p>
+<input type="number" id="p" placeholder="Enter p">
+<input type="number" id="g" placeholder="Enter g">
+<button onclick="generateKeys()">Generate Keys</button>
+<p>Private Key (a): <span id="privateKey"></span></p>
+<p>Public Key (A): <span id="publicKey"></span></p>
+<p>Shared Secret Key (B<sup>a</sup> mod p): <span id="sharedSecret"></span></p>
+<script>
+function generateKeys() {
+const p = parseInt(document.getElementById('p').value);const
+g = parseInt(document.getElementById('g').value);
+// Generate private key (a)
+const a = Math.floor(Math.random() * (p - 1)) + 1;
+document.getElementById('privateKey').textContent = a;
+// Calculate public key (A)
+const A = (g ** a) % p;
+document.getElementById('publicKey').textContent = A;
+// Simulate receiving public key (B) from other party (hardcoded for demonstration)const B = 7;
+// Calculate shared secret key (B^a mod p)
+const sharedSecret = (B ** a) % p;
+document.getElementById('sharedSecret').textContent = sharedSecret;
+}
+</script>
+</body>
+</html>
